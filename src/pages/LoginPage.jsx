@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { Mail, Key, AlertCircle, LogIn } from 'lucide-react'
+import { Mail, Key, AlertCircle, LogIn, ShoppingBag } from 'lucide-react'
 
 export function LoginPage() {
   const [email, setEmail] = useState('')
@@ -28,8 +28,8 @@ export function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-indigo-600 shadow-xl shadow-indigo-500/30 mb-6 border-4 border-white dark:border-slate-800">
-            <span className="text-4xl font-black text-white tracking-tighter">B</span>
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 shadow-xl shadow-indigo-500/30 mb-6 border-4 border-white dark:border-slate-800">
+            <ShoppingBag size={36} className="text-white" />
           </div>
           <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 font-black tracking-tight">
             Bite
