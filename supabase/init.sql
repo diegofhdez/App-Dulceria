@@ -1,4 +1,4 @@
--- Script de inicialización de Supabase para la Dulcería Escolar
+-- Script de inicialización de Supabase para Bite
 
 -- Habilitar extensión UUID
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

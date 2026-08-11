@@ -32,7 +32,7 @@ export function LoginPage() {
             <span className="text-4xl">🍬</span>
           </div>
           <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 font-black tracking-tight">
-            Dulcería Escolar
+            Bite
           </h1>
           <p className="text-slate-500 font-medium mt-2">Ingresa para continuar</p>
         </div>
