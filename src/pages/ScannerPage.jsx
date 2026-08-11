@@ -234,7 +234,7 @@ export function ScannerPage() {
                 disabled={isOutOfStock}
                 className={clsx(
                   "p-3 rounded-3xl border flex flex-col items-center relative transition-transform text-center",
-                  isOutOfStock ? "bg-slate-50 border-slate-200 opacity-60 grayscale" : "bg-white border-slate-100 shadow-sm active:scale-95 hover:border-blue-200"
+                  isOutOfStock ? "bg-slate-50 border-slate-200 opacity-60 grayscale" : (p.stock <= 3 ? "bg-orange-50/30 border-orange-300 shadow-sm" : "bg-white border-slate-100 shadow-sm active:scale-95 hover:border-blue-200")
                 )}
               >
                 {/* Cart Badge */}
@@ -258,6 +258,10 @@ export function ScannerPage() {
                 
                 {isOutOfStock ? (
                   <p className="text-[10px] font-bold text-red-500 uppercase tracking-wider mt-1 bg-red-50 px-2 py-0.5 rounded-lg">Agotado</p>
+                ) : p.stock <= 3 ? (
+                  <p className="text-[10px] font-bold text-orange-600 uppercase tracking-wider mt-1 bg-orange-100 px-2 py-0.5 rounded-lg animate-pulse">
+                    ¡Solo quedan {p.stock}!
+                  </p>
                 ) : (
                   <p className="text-[10px] font-bold text-slate-400 mt-1 bg-slate-50 px-2 py-0.5 rounded-lg">Stock: {p.stock}</p>
                 )}
