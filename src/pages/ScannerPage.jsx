@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
-import { Search, Banknote, Trash2, Package, CheckCircle2, Clock, X, Camera } from 'lucide-react'
+import { Search, Banknote, Trash2, Package, CheckCircle2, Clock, X, Camera, QrCode, SmartphoneNfc } from 'lucide-react'
 import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode'
 import { clsx } from 'clsx'
 
@@ -13,6 +13,9 @@ export function ScannerPage() {
   const [isCheckingOut, setIsCheckingOut] = useState(false)
   const [success, setSuccess] = useState('')
   const [isScanning, setIsScanning] = useState(false)
+  
+  const [qrModalOpen, setQrModalOpen] = useState(false)
+  const [qrPaymentSuccess, setQrPaymentSuccess] = useState(false)
   
   // Modal Fiado/Cobro states
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false)
@@ -319,6 +322,18 @@ export function ScannerPage() {
                 {isCheckingOut ? <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div> : <Banknote size={28} />}
                 Pago en Efectivo
               </button>
+              
+              <button
+                onClick={() => {
+                  setCheckoutModalOpen(false);
+                  setQrModalOpen(true);
+                }}
+                disabled={isCheckingOut}
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white py-5 rounded-2xl font-black text-xl shadow-lg shadow-slate-900/30 flex justify-center items-center gap-3 transition-transform active:scale-95 disabled:opacity-50 mt-3"
+              >
+                <SmartphoneNfc size={28} />
+                QR / Apple Pay
+              </button>
 
               <div className="relative py-4 flex items-center">
                 <div className="flex-grow border-t border-slate-200"></div>
@@ -358,6 +373,44 @@ export function ScannerPage() {
             <CheckCircle2 size={70} strokeWidth={3} />
           </div>
           <h2 className="text-3xl font-black tracking-tight">{success}</h2>
+        </div>
+      )}
+
+      {/* QR / Apple Pay Modal */}
+      {qrModalOpen && (
+        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-6 animate-in fade-in">
+          <div className="bg-white rounded-3xl w-full max-w-sm p-8 shadow-2xl flex flex-col items-center text-center">
+            <h3 className="text-2xl font-black text-slate-800 mb-2">Escanea para pagar</h3>
+            <p className="text-slate-500 font-medium mb-6">El cliente debe escanear este código con su celular</p>
+
+            {/* QR Code Placeholder */}
+            <div className="w-64 h-64 bg-slate-100 rounded-2xl flex items-center justify-center border-4 border-slate-800 mb-6 relative overflow-hidden">
+                <QrCode size={120} className="text-slate-300" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-slate-200/50 to-transparent"></div>
+            </div>
+
+            <div className="text-4xl font-black text-slate-900 mb-8">
+              ${cartTotal.toFixed(2)}
+            </div>
+
+            <div className="flex w-full gap-3">
+              <button 
+                onClick={() => setQrModalOpen(false)}
+                className="flex-1 py-4 font-bold text-slate-600 bg-slate-100 rounded-2xl hover:bg-slate-200 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button 
+                onClick={() => {
+                  setQrModalOpen(false);
+                  confirmSale('qr_apple_pay');
+                }}
+                className="flex-1 py-4 font-black text-white bg-slate-900 rounded-2xl hover:bg-slate-800 transition-colors shadow-lg"
+              >
+                Confirmar Pago
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
