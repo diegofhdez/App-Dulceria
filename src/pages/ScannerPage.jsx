@@ -183,7 +183,7 @@ export function ScannerPage() {
     <div className="relative min-h-[calc(100vh-140px)]">
       
       {/* Search & Scan Header */}
-      <div className="sticky top-0 z-10 bg-slate-50/90 backdrop-blur-md pb-4 pt-2 space-y-3">
+      <div className="sticky top-0 z-10 bg-slate-50/90 dark:bg-[#0B1121]/90 backdrop-blur-md pb-4 pt-2 space-y-3">
         {!isScanning ? (
           <button 
             onClick={() => setIsScanning(true)}

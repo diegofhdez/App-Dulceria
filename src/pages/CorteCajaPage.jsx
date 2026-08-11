@@ -290,12 +290,12 @@ export function CorteCajaPage() {
       <div className="h-px bg-slate-200 w-full rounded-full mt-6"></div>
 
       {/* Filters for Corte */}
-      <div className="bg-slate-100 p-1.5 rounded-2xl flex gap-1 shadow-inner mt-6">
+      <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl flex gap-1 shadow-inner mt-6">
         <button 
           onClick={() => setFilter('day')}
           className={clsx(
             "flex-1 py-3 text-sm font-bold rounded-xl transition-all",
-            filter === 'day' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            filter === 'day' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
           )}
         >
           Día
@@ -304,7 +304,7 @@ export function CorteCajaPage() {
           onClick={() => setFilter('week')}
           className={clsx(
             "flex-1 py-3 text-sm font-bold rounded-xl transition-all",
-            filter === 'week' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            filter === 'week' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
           )}
         >
           Semana
@@ -313,7 +313,7 @@ export function CorteCajaPage() {
           onClick={() => setFilter('month')}
           className={clsx(
             "flex-1 py-3 text-sm font-bold rounded-xl transition-all",
-            filter === 'month' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            filter === 'month' ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
           )}
         >
           Mes
