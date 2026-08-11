@@ -98,7 +98,7 @@ export function DeudasPage() {
 
       {/* Header and Add Button */}
       <div className="flex justify-between items-center px-1">
-        <h3 className="font-bold text-slate-800 flex items-center gap-2">
+        <h3 className="font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
           <AlertCircle size={20} className="text-orange-500" /> Quienes deben
         </h3>
         <button 
@@ -115,7 +115,7 @@ export function DeudasPage() {
             {[1,2,3].map(i => <div key={i} className="h-24 bg-slate-200 rounded-3xl"></div>)}
           </div>
         ) : debtors.length === 0 ? (
-          <div className="text-center py-12 bg-white border border-slate-100 rounded-3xl text-slate-400 font-medium shadow-sm">
+          <div className="text-center py-12 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl shadow-sm text-slate-800 dark:text-slate-100 font-medium">
             ¡Nadie debe nada! 🎉
           </div>
         ) : (
