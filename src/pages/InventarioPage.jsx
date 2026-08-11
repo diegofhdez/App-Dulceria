@@ -258,14 +258,13 @@ export function InventarioPage() {
                 </div>
               </div>
               
-              <div className="flex gap-2 shrink-0">
+              <div className="flex items-center gap-2 shrink-0">
                 <button 
                   onClick={() => handleOpenEdit(p)}
-                  className="bg-slate-50 hover:bg-slate-100 text-slate-700 px-4 py-3 rounded-2xl flex flex-col items-center justify-center transition-colors shadow-sm border border-slate-200 active:scale-95"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl transition-colors shadow-sm border border-slate-200 active:scale-95"
                   title="Editar Producto"
                 >
-                  <Pencil size={22} className="mb-1" />
-                  <span className="text-[10px] font-black uppercase tracking-wider">Editar</span>
+                  <Pencil size={20} />
                 </button>
                 <button 
                   onClick={() => handleOpenSurtido(p)}
