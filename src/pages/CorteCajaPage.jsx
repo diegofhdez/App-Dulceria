@@ -60,7 +60,7 @@ export function CorteCajaPage() {
 
         if (m.tipo_movimiento === 'venta') {
           prod.soldQty += m.cantidad
-          if (m.metodo_pago === 'efectivo') {
+          if (m.metodo_pago === 'efectivo' || m.metodo_pago === 'qr_apple_pay') {
             const saleValue = prod.precio_venta * m.cantidad
             prod.recovered += saleValue
             totalRecup += saleValue
@@ -331,22 +331,39 @@ export function CorteCajaPage() {
       ) : (
         <>
           {/* Summary Cards */}
-          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-6 text-white shadow-xl shadow-emerald-500/20 relative overflow-hidden">
-            <div className="absolute -right-6 -top-6 text-white/10">
-              <Banknote size={120} />
-            </div>
-            <div className="relative z-10">
-              <div className="flex items-center gap-2 text-emerald-50 mb-3">
-                <Banknote size={20} />
-                <h2 className="font-bold tracking-wide text-sm uppercase">Efectivo a Entregar</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Tarjeta Efectivo Físico */}
+            <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-6 text-white shadow-xl shadow-emerald-500/20 relative overflow-hidden">
+              <div className="absolute -right-6 -top-6 text-white/10">
+                <Banknote size={120} />
               </div>
-              <p className="text-5xl font-black">${data.efectivoEntregar.toFixed(2)}</p>
-              <p className="text-emerald-100 text-sm mt-3 font-medium">Ventas efectivo + Abonos recibidos</p>
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 text-emerald-50 mb-3">
+                  <Banknote size={20} />
+                  <h2 className="font-bold tracking-wide text-sm uppercase">Efectivo en Caja</h2>
+                </div>
+                <p className="text-5xl font-black">${data.efectivoEntregar.toFixed(2)}</p>
+                <p className="text-emerald-100 text-sm mt-3 font-medium">Billetes y monedas</p>
+              </div>
+            </div>
+
+            {/* Tarjeta Banco / Apple Pay */}
+            <div className="bg-gradient-to-br from-indigo-500 to-blue-600 rounded-3xl p-6 text-white shadow-xl shadow-indigo-500/20 relative overflow-hidden">
+              <div className="absolute -right-6 -top-6 text-white/10">
+                <SmartphoneNfc size={120} />
+              </div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 text-indigo-50 mb-3">
+                  <SmartphoneNfc size={20} />
+                  <h2 className="font-bold tracking-wide text-sm uppercase">Dinero en Banco</h2>
+                </div>
+                <p className="text-5xl font-black">${data.applePay.toFixed(2)}</p>
+                <p className="text-indigo-100 text-sm mt-3 font-medium">Pagos Apple Pay / QR</p>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            {/* Tarjeta Ganancias */}
+          <div className="flex gap-4 mt-4">
             <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-slate-500 mb-2">
                 <TrendingUp size={18} className="text-blue-500" />
@@ -355,16 +372,6 @@ export function CorteCajaPage() {
               <p className="text-3xl font-black text-slate-800">${data.gananciaNeta.toFixed(2)}</p>
             </div>
             
-            {/* Tarjeta Apple Pay / Digital */}
-            <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
-              <div className="flex items-center gap-2 text-slate-500 mb-2">
-                <SmartphoneNfc size={18} className="text-indigo-500" />
-                <span className="text-xs font-bold uppercase tracking-wider">Apple Pay / QR</span>
-              </div>
-              <p className="text-3xl font-black text-slate-800">${data.applePay.toFixed(2)}</p>
-            </div>
-
-            {/* Tarjeta Fiado */}
             <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-slate-500 mb-2">
                 <CreditCard size={18} className="text-orange-500" />
