@@ -237,7 +237,7 @@ export function InventarioPage() {
           </div>
         ) : (
           filteredProducts.map(p => (
-            <div key={p.id} className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between gap-4 transition-all hover:shadow-md">
+            <div key={p.id} className={`p-4 sm:p-5 rounded-3xl shadow-sm border flex items-center justify-between gap-4 transition-all hover:shadow-md ${p.stock <= 3 ? 'bg-orange-50/30 dark:bg-orange-950/30 border-orange-300 dark:border-orange-800' : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-700'}`}>
               <div className="flex items-center gap-4 overflow-hidden">
                 {/* Thumbnail */}
                 {p.imagen_url ? (
@@ -252,7 +252,13 @@ export function InventarioPage() {
                   <h4 className="font-black text-slate-800 dark:text-slate-100 text-lg sm:text-xl truncate leading-tight mb-1">{p.nombre}</h4>
                   <p className="text-xs text-slate-400 font-bold font-mono mb-2 truncate">{p.codigo_barras}</p>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                    <span className="text-slate-600 font-bold">Stock: <b className={p.stock <= 5 ? "text-red-500" : "text-slate-800 dark:text-slate-100"}>{p.stock}</b></span>
+                    <span className="text-slate-600 dark:text-slate-400 font-bold">
+                      Stock: {p.stock <= 3 ? (
+                        <b className="text-orange-600 dark:text-orange-400 animate-pulse ml-1">¡Solo quedan {p.stock}!</b>
+                      ) : (
+                        <b className="text-slate-800 dark:text-slate-100 ml-1">{p.stock}</b>
+                      )}
+                    </span>
                     <span className="text-emerald-600 font-black">${p.precio_venta}</span>
                   </div>
                 </div>
