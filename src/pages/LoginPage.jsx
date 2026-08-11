@@ -31,7 +31,7 @@ export function LoginPage() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-500 shadow-xl shadow-purple-500/30 mb-6">
             <span className="text-4xl">🍬</span>
           </div>
-          <h1 className="text-3xl font-black bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 font-black tracking-tight">
             Dulcería Escolar
           </h1>
           <p className="text-slate-500 font-medium mt-2">Ingresa para continuar</p>

@@ -52,7 +52,7 @@ function App() {
     <Router>
       <div className="pb-16 min-h-screen relative bg-slate-50 dark:bg-slate-950">
         <header className="bg-white dark:bg-slate-900 shadow-sm p-4 sticky top-0 z-10 flex justify-between items-center border-b border-slate-100 dark:border-slate-700">
-          <h1 className="text-xl font-black bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 font-black tracking-tight">
             Dulcería Escolar
           </h1>
           <button 
