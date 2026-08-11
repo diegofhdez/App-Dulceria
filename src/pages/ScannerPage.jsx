@@ -192,7 +192,7 @@ export function ScannerPage() {
             <Camera size={24} /> Escanear Código
           </button>
         ) : (
-          <div className="bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-lg animate-in fade-in">
+          <div className="bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-3xl overflow-hidden shadow-lg animate-in fade-in">
             <div id="reader-sell" className="w-full bg-black/5 [&>div]:border-none [&_video]:object-cover"></div>
             <button 
               type="button"
@@ -211,7 +211,7 @@ export function ScannerPage() {
             placeholder="O buscar dulce a mano..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 font-medium"
+            className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-slate-100 font-medium dark:text-white"
           />
         </div>
       </div>
@@ -234,7 +234,7 @@ export function ScannerPage() {
                 disabled={isOutOfStock}
                 className={clsx(
                   "p-3 rounded-3xl border flex flex-col items-center relative transition-transform text-center",
-                  isOutOfStock ? "bg-slate-50 border-slate-200 opacity-60 grayscale" : (p.stock <= 3 ? "bg-orange-50/30 border-orange-300 shadow-sm" : "bg-white border-slate-100 shadow-sm active:scale-95 hover:border-blue-200")
+                  isOutOfStock ? "bg-slate-50 border-slate-200 dark:border-slate-700 opacity-60 grayscale" : (p.stock <= 3 ? "bg-orange-50/30 border-orange-300 shadow-sm" : "bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-700 shadow-sm active:scale-95 hover:border-blue-200")
                 )}
               >
                 {/* Cart Badge */}
@@ -248,7 +248,7 @@ export function ScannerPage() {
                 {p.imagen_url ? (
                   <img src={p.imagen_url} alt={p.nombre} className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover mb-2 shadow-sm" />
                 ) : (
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 text-slate-300 flex items-center justify-center mb-2 border border-slate-100">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 text-slate-300 flex items-center justify-center mb-2 border border-slate-100 dark:border-slate-700">
                     <Package size={28} />
                   </div>
                 )}
@@ -286,7 +286,7 @@ export function ScannerPage() {
             <div className="flex gap-2">
               <button 
                 onClick={() => setCart([])} 
-                className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-white/20 active:scale-95 transition-all"
+                className="w-14 h-14 rounded-2xl bg-white dark:bg-slate-900/10 flex items-center justify-center text-white/70 hover:text-red-400 hover:bg-white dark:bg-slate-900/20 active:scale-95 transition-all"
               >
                 <Trash2 size={24} />
               </button>
@@ -304,9 +304,9 @@ export function ScannerPage() {
       {/* Checkout Options Modal */}
       {checkoutModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center animate-in fade-in">
-          <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-6 shadow-2xl h-auto animate-in slide-in-from-bottom-full sm:zoom-in-95">
+          <div className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl w-full max-w-md p-6 shadow-2xl h-auto animate-in slide-in-from-bottom-full sm:zoom-in-95">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-black text-slate-800">Finalizar Venta</h3>
+              <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100">Finalizar Venta</h3>
               <button onClick={() => setCheckoutModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-2 bg-slate-100 rounded-full">
                 <X size={20} />
               </button>
@@ -340,14 +340,14 @@ export function ScannerPage() {
               </button>
 
               <div className="relative py-4 flex items-center">
-                <div className="flex-grow border-t border-slate-200"></div>
+                <div className="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
                 <span className="flex-shrink-0 mx-4 text-slate-400 text-xs font-bold uppercase tracking-wider">O dar a Fiado</span>
-                <div className="flex-grow border-t border-slate-200"></div>
+                <div className="flex-grow border-t border-slate-200 dark:border-slate-700"></div>
               </div>
 
-              <div className="bg-slate-50 p-5 rounded-3xl border border-slate-100">
+              <div className="bg-slate-50 p-5 rounded-3xl border border-slate-100 dark:border-slate-700">
                 <select 
-                  className="w-full p-4 bg-white border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-orange-500 text-slate-800 font-bold mb-3"
+                  className="w-full p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-orange-500 text-slate-800 dark:text-slate-100 font-bold mb-3 dark:text-white"
                   value={selectedClient}
                   onChange={(e) => setSelectedClient(e.target.value)}
                 >
@@ -373,7 +373,7 @@ export function ScannerPage() {
       {/* Success Fullscreen Animation */}
       {success && (
         <div className="fixed inset-0 z-[100] bg-emerald-500 flex flex-col items-center justify-center text-white animate-in fade-in duration-300">
-          <div className="bg-white text-emerald-500 rounded-full w-28 h-28 flex items-center justify-center mb-6 shadow-2xl animate-bounce">
+          <div className="bg-white dark:bg-slate-900 text-emerald-500 rounded-full w-28 h-28 flex items-center justify-center mb-6 shadow-2xl animate-bounce">
             <CheckCircle2 size={70} strokeWidth={3} />
           </div>
           <h2 className="text-3xl font-black tracking-tight">{success}</h2>
@@ -383,8 +383,8 @@ export function ScannerPage() {
       {/* QR / Apple Pay Modal */}
       {qrModalOpen && (
         <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-6 animate-in fade-in">
-          <div className="bg-white rounded-3xl w-full max-w-sm p-8 shadow-2xl flex flex-col items-center text-center">
-            <h3 className="text-2xl font-black text-slate-800 mb-2">Escanea para pagar</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-sm p-8 shadow-2xl flex flex-col items-center text-center">
+            <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 mb-2">Escanea para pagar</h3>
             <p className="text-slate-500 font-medium mb-6">El cliente debe escanear este código con su celular</p>
 
             {/* QR Code Placeholder */}
@@ -393,7 +393,7 @@ export function ScannerPage() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-slate-200/50 to-transparent"></div>
             </div>
 
-            <div className="text-4xl font-black text-slate-900 mb-8">
+            <div className="text-4xl font-black text-slate-900 dark:text-slate-100 mb-8">
               ${cartTotal.toFixed(2)}
             </div>
 

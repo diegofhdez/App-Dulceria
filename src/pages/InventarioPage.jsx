@@ -214,7 +214,7 @@ export function InventarioPage() {
             placeholder="Buscar dulce..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 font-medium"
+            className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-slate-900 dark:text-slate-100 font-medium dark:text-white"
           />
         </div>
         <button 
@@ -232,27 +232,27 @@ export function InventarioPage() {
             {[1,2,3].map(i => <div key={i} className="h-28 bg-slate-200 rounded-3xl"></div>)}
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="text-center py-12 bg-white border border-slate-100 rounded-3xl text-slate-400 font-medium shadow-sm">
+          <div className="text-center py-12 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-3xl text-slate-400 font-medium shadow-sm">
             No se encontraron productos
           </div>
         ) : (
           filteredProducts.map(p => (
-            <div key={p.id} className="bg-white p-4 sm:p-5 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between gap-4 transition-all hover:shadow-md">
+            <div key={p.id} className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between gap-4 transition-all hover:shadow-md">
               <div className="flex items-center gap-4 overflow-hidden">
                 {/* Thumbnail */}
                 {p.imagen_url ? (
-                  <img src={p.imagen_url} alt={p.nombre} className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-100 shrink-0 shadow-sm" />
+                  <img src={p.imagen_url} alt={p.nombre} className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-100 dark:border-slate-700 shrink-0 shadow-sm" />
                 ) : (
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-300 shrink-0">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-300 shrink-0">
                     <ImageIcon size={32} />
                   </div>
                 )}
                 
                 <div className="min-w-0">
-                  <h4 className="font-black text-slate-800 text-lg sm:text-xl truncate leading-tight mb-1">{p.nombre}</h4>
+                  <h4 className="font-black text-slate-800 dark:text-slate-100 text-lg sm:text-xl truncate leading-tight mb-1">{p.nombre}</h4>
                   <p className="text-xs text-slate-400 font-bold font-mono mb-2 truncate">{p.codigo_barras}</p>
                   <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                    <span className="text-slate-600 font-bold">Stock: <b className={p.stock <= 5 ? "text-red-500" : "text-slate-800"}>{p.stock}</b></span>
+                    <span className="text-slate-600 font-bold">Stock: <b className={p.stock <= 5 ? "text-red-500" : "text-slate-800 dark:text-slate-100"}>{p.stock}</b></span>
                     <span className="text-emerald-600 font-black">${p.precio_venta}</span>
                   </div>
                 </div>
@@ -261,7 +261,7 @@ export function InventarioPage() {
               <div className="flex items-center gap-2 shrink-0">
                 <button 
                   onClick={() => handleOpenEdit(p)}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl transition-colors shadow-sm border border-slate-200 active:scale-95"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl transition-colors shadow-sm border border-slate-200 dark:border-slate-700 active:scale-95"
                   title="Editar Producto"
                 >
                   <Pencil size={20} />
@@ -283,9 +283,9 @@ export function InventarioPage() {
       {/* Add Product Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center animate-in fade-in">
-          <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-6 shadow-2xl max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-full sm:zoom-in-95">
-            <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-2">
-              <h3 className="text-2xl font-black text-slate-800">{editingProduct ? 'Editar Producto' : 'Nuevo Producto'}</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl w-full max-w-md p-6 shadow-2xl max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-full sm:zoom-in-95">
+            <div className="flex justify-between items-center mb-6 sticky top-0 bg-white dark:bg-slate-900 z-10 pb-2">
+              <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100">{editingProduct ? 'Editar Producto' : 'Nuevo Producto'}</h3>
               <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-2 bg-slate-100 rounded-full">
                 <X size={20} />
               </button>
@@ -296,11 +296,11 @@ export function InventarioPage() {
               {/* Image Upload */}
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Foto (Opcional)</label>
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
                   {imagePreview ? (
                     <img src={imagePreview} alt="Preview" className="w-20 h-20 rounded-xl object-cover border border-slate-300 shadow-sm" />
                   ) : (
-                    <div className="w-20 h-20 rounded-xl bg-white border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 shrink-0">
+                    <div className="w-20 h-20 rounded-xl bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 shrink-0">
                       <ImageIcon size={28} />
                     </div>
                   )}
@@ -314,7 +314,7 @@ export function InventarioPage() {
                         setImagePreview(URL.createObjectURL(file))
                       }
                     }}
-                    className="flex-1 text-sm font-medium text-slate-600 file:mr-4 file:py-3 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 transition-colors w-full cursor-pointer"
+                    className="flex-1 text-sm font-medium text-slate-600 file:mr-4 file:py-3 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 transition-colors w-full cursor-pointer dark:bg-slate-800 dark:text-white"
                   />
                 </div>
               </div>
@@ -322,7 +322,7 @@ export function InventarioPage() {
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Código de Barras</label>
                 {isScanning ? (
-                  <div className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden mb-2">
+                  <div className="bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden mb-2">
                     <div id="reader-add" className="w-full bg-black/5 [&>div]:border-none [&_video]:object-cover"></div>
                     <button 
                       type="button"
@@ -337,7 +337,7 @@ export function InventarioPage() {
                     <input 
                       type="text" required
                       value={codigoBarras} onChange={e => setCodigoBarras(e.target.value)}
-                      className="flex-1 p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 font-medium"
+                      className="flex-1 p-4 bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 font-medium dark:bg-slate-800 dark:text-white"
                     />
                     <button 
                       type="button"
@@ -355,7 +355,7 @@ export function InventarioPage() {
                 <input 
                   type="text" required
                   value={nombre} onChange={e => setNombre(e.target.value)}
-                  className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 font-medium"
+                  className="w-full p-4 bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 font-medium dark:bg-slate-800 dark:text-white"
                 />
               </div>
 
@@ -365,7 +365,7 @@ export function InventarioPage() {
                   <input 
                     type="number" step="0.01" required
                     value={precioCosto} onChange={e => setPrecioCosto(e.target.value)}
-                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 font-medium"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 font-medium dark:bg-slate-800 dark:text-white"
                   />
                 </div>
                 <div className="flex-1">
@@ -373,7 +373,7 @@ export function InventarioPage() {
                   <input 
                     type="number" step="0.01" required
                     value={precioVenta} onChange={e => setPrecioVenta(e.target.value)}
-                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500 text-emerald-900 font-black"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-emerald-500 text-emerald-900 font-black dark:bg-slate-800 dark:text-white"
                   />
                 </div>
               </div>
@@ -383,7 +383,7 @@ export function InventarioPage() {
                 <input 
                   type="number"
                   value={stock} onChange={e => setStock(e.target.value)}
-                  className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 font-medium"
+                  className="w-full p-4 bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 font-medium dark:bg-slate-800 dark:text-white"
                 />
               </div>
 
@@ -408,8 +408,8 @@ export function InventarioPage() {
       {/* Surtido Modal */}
       {surtidoModalOpen && selectedProduct && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl animate-in zoom-in-95">
-            <h3 className="text-2xl font-black text-slate-800 mb-1">Surtir Stock</h3>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-sm p-6 shadow-2xl animate-in zoom-in-95">
+            <h3 className="text-2xl font-black text-slate-800 dark:text-slate-100 mb-1">Surtir Stock</h3>
             <p className="text-slate-500 font-medium mb-6">{selectedProduct.nombre}</p>
             
             <div className="mb-8">
@@ -420,7 +420,7 @@ export function InventarioPage() {
                 type="number" min="1"
                 value={surtidoQty}
                 onChange={(e) => setSurtidoQty(e.target.value)}
-                className="w-full p-6 bg-slate-50 border border-slate-200 rounded-2xl text-4xl font-black text-center outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 text-slate-900"
+                className="w-full p-6 bg-slate-50 border border-slate-200 dark:border-slate-700 rounded-2xl text-4xl font-black text-center outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 text-slate-900 dark:text-slate-100 dark:bg-slate-800 dark:text-white"
               />
             </div>
 

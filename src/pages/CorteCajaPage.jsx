@@ -199,15 +199,15 @@ export function CorteCajaPage() {
     <div className="space-y-6 pb-6">
       
       {/* Estado de Inversión Global (Lifetime) */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
-        <h3 className="font-bold text-slate-800 mb-5 flex items-center gap-2">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
+        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-5 flex items-center gap-2">
           <Target size={20} className="text-indigo-500" /> Estado de Inversión
         </h3>
         
         <div className="flex justify-between items-end mb-3">
           <div>
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1">Inversión Total</p>
-            <p className="text-3xl font-black text-slate-800">${inversion.total.toFixed(2)}</p>
+            <p className="text-3xl font-black text-slate-800 dark:text-slate-100">${inversion.total.toFixed(2)}</p>
           </div>
           <div className="text-right">
             <p className="text-[10px] font-black text-emerald-500 uppercase tracking-wider mb-1">Recuperado</p>
@@ -241,7 +241,7 @@ export function CorteCajaPage() {
 
       {/* Rendimiento por Producto */}
       <div>
-        <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 px-1">
+        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2 px-1">
           <BarChart3 size={20} className="text-amber-500" /> Rendimiento por Producto
         </h3>
         
@@ -251,9 +251,9 @@ export function CorteCajaPage() {
             const barWidth = Math.min(p.porcentaje, 100)
             
             return (
-              <div key={p.id} className="bg-white p-4 rounded-3xl shadow-sm border border-slate-100">
+              <div key={p.id} className="bg-white dark:bg-slate-900 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div className="flex justify-between items-center mb-3">
-                  <h4 className="font-black text-slate-800 truncate pr-2">{p.nombre}</h4>
+                  <h4 className="font-black text-slate-800 dark:text-slate-100 truncate pr-2">{p.nombre}</h4>
                   <span className={clsx(
                     "text-xs font-black px-2 py-1 rounded-lg shrink-0",
                     isProfit ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
@@ -295,7 +295,7 @@ export function CorteCajaPage() {
           onClick={() => setFilter('day')}
           className={clsx(
             "flex-1 py-3 text-sm font-bold rounded-xl transition-all",
-            filter === 'day' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            filter === 'day' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm' : 'text-slate-500 hover:text-slate-700'
           )}
         >
           Día
@@ -304,7 +304,7 @@ export function CorteCajaPage() {
           onClick={() => setFilter('week')}
           className={clsx(
             "flex-1 py-3 text-sm font-bold rounded-xl transition-all",
-            filter === 'week' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            filter === 'week' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm' : 'text-slate-500 hover:text-slate-700'
           )}
         >
           Semana
@@ -313,7 +313,7 @@ export function CorteCajaPage() {
           onClick={() => setFilter('month')}
           className={clsx(
             "flex-1 py-3 text-sm font-bold rounded-xl transition-all",
-            filter === 'month' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+            filter === 'month' ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-sm' : 'text-slate-500 hover:text-slate-700'
           )}
         >
           Mes
@@ -364,31 +364,31 @@ export function CorteCajaPage() {
           </div>
 
           <div className="flex gap-4 mt-4">
-            <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-slate-500 mb-2">
                 <TrendingUp size={18} className="text-blue-500" />
                 <span className="text-xs font-bold uppercase tracking-wider">Ganancias</span>
               </div>
-              <p className="text-3xl font-black text-slate-800">${data.gananciaNeta.toFixed(2)}</p>
+              <p className="text-3xl font-black text-slate-800 dark:text-slate-100">${data.gananciaNeta.toFixed(2)}</p>
             </div>
             
-            <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
+            <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-slate-500 mb-2">
                 <CreditCard size={18} className="text-orange-500" />
                 <span className="text-xs font-bold uppercase tracking-wider">Fiado</span>
               </div>
-              <p className="text-3xl font-black text-slate-800">${data.nuevoFiado.toFixed(2)}</p>
+              <p className="text-3xl font-black text-slate-800 dark:text-slate-100">${data.nuevoFiado.toFixed(2)}</p>
             </div>
           </div>
 
           {/* Reconciliation Table */}
           <div className="mt-8">
-            <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 px-1">
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2 px-1">
               <CalendarDays size={20} className="text-purple-500" /> 
               Conciliación
             </h3>
             
-            <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left whitespace-nowrap">
                   <thead className="bg-slate-50 text-slate-500 text-[10px] uppercase font-bold tracking-wider">
@@ -398,7 +398,7 @@ export function CorteCajaPage() {
                       <th className="px-4 py-4 text-center text-emerald-600">- Efectivo</th>
                       <th className="px-4 py-4 text-center text-orange-500">- Fiado</th>
                       <th className="px-4 py-4 text-center text-indigo-500">- ApplePay</th>
-                      <th className="px-5 py-4 text-center text-slate-800">= Queda</th>
+                      <th className="px-5 py-4 text-center text-slate-800 dark:text-slate-100">= Queda</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -411,12 +411,12 @@ export function CorteCajaPage() {
                     ) : (
                       data.table.map((row, idx) => (
                         <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="px-5 py-4 font-bold text-slate-800">{row.nombre}</td>
+                          <td className="px-5 py-4 font-bold text-slate-800 dark:text-slate-100">{row.nombre}</td>
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.surtido}</td>
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoEfectivo}</td>
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoFiado}</td>
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoApplePay}</td>
-                          <td className="px-5 py-4 text-center font-black text-slate-900 bg-slate-50/50">{row.stockActual}</td>
+                          <td className="px-5 py-4 text-center font-black text-slate-900 dark:text-slate-100 bg-slate-50/50">{row.stockActual}</td>
                         </tr>
                       ))
                     )}

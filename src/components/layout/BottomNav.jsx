@@ -11,7 +11,7 @@ export function BottomNav() {
   ]
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-2 pb-safe z-50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 flex justify-around items-center h-16 px-2 pb-safe z-50">
       {navItems.map(({ to, icon: Icon, label }) => (
         <NavLink
           key={to}

@@ -38,7 +38,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
         <div className="w-10 h-10 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
       </div>
     )
@@ -50,8 +50,8 @@ function App() {
 
   return (
     <Router>
-      <div className="pb-16 min-h-screen relative bg-slate-50">
-        <header className="bg-white shadow-sm p-4 sticky top-0 z-10 flex justify-between items-center border-b border-slate-100">
+      <div className="pb-16 min-h-screen relative bg-slate-50 dark:bg-slate-950">
+        <header className="bg-white dark:bg-slate-900 shadow-sm p-4 sticky top-0 z-10 flex justify-between items-center border-b border-slate-100 dark:border-slate-700">
           <h1 className="text-xl font-black bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
             Dulcería Escolar
           </h1>
