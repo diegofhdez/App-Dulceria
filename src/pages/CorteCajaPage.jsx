@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { startOfDay, startOfWeek, startOfMonth, endOfDay } from 'date-fns'
-import { Banknote, TrendingUp, CreditCard, CalendarDays, Target, BarChart3 } from 'lucide-react'
+import { Banknote, TrendingUp, CreditCard, CalendarDays, Target, BarChart3, SmartphoneNfc } from 'lucide-react'
 import { clsx } from 'clsx'
 
 export function CorteCajaPage() {
   const [filter, setFilter] = useState('day') // day, week, month
   const [data, setData] = useState({
     efectivoEntregar: 0,
+    applePay: 0,
     gananciaNeta: 0,
     nuevoFiado: 0,
     table: []
@@ -126,6 +127,7 @@ export function CorteCajaPage() {
     const { data: productos } = await supabase.from('productos').select('*')
 
     let totalEfectivoVentas = 0
+    let totalApplePay = 0
     let totalFiado = 0
     let totalGanancia = 0
     let totalAbonos = 0
@@ -169,6 +171,8 @@ export function CorteCajaPage() {
           } else if (m.metodo_pago === 'pendiente') {
             totalFiado += parseFloat(precioTotal)
             prod.vendidoFiado += m.cantidad
+          } else if (m.metodo_pago === 'qr_apple_pay') {
+            totalApplePay += parseFloat(precioTotal)
           }
         }
       })
@@ -180,6 +184,7 @@ export function CorteCajaPage() {
 
     setData({
       efectivoEntregar: totalEfectivoVentas + totalAbonos,
+      applePay: totalApplePay,
       gananciaNeta: totalGanancia,
       nuevoFiado: totalFiado,
       table: tableData
@@ -338,7 +343,8 @@ export function CorteCajaPage() {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* Tarjeta Ganancias */}
             <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-slate-500 mb-2">
                 <TrendingUp size={18} className="text-blue-500" />
@@ -347,6 +353,16 @@ export function CorteCajaPage() {
               <p className="text-3xl font-black text-slate-800">${data.gananciaNeta.toFixed(2)}</p>
             </div>
             
+            {/* Tarjeta Apple Pay / Digital */}
+            <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
+              <div className="flex items-center gap-2 text-slate-500 mb-2">
+                <SmartphoneNfc size={18} className="text-indigo-500" />
+                <span className="text-xs font-bold uppercase tracking-wider">Apple Pay / QR</span>
+              </div>
+              <p className="text-3xl font-black text-slate-800">${data.applePay.toFixed(2)}</p>
+            </div>
+
+            {/* Tarjeta Fiado */}
             <div className="bg-white p-5 rounded-3xl flex-1 shadow-sm border border-slate-100 flex flex-col justify-center">
               <div className="flex items-center gap-2 text-slate-500 mb-2">
                 <CreditCard size={18} className="text-orange-500" />
