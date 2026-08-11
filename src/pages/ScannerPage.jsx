@@ -263,7 +263,7 @@ export function ScannerPage() {
                     ¡Solo quedan {p.stock}!
                   </p>
                 ) : (
-                  <p className="text-[10px] font-bold text-slate-400 mt-1 bg-slate-50 px-2 py-0.5 rounded-lg">Stock: {p.stock}</p>
+                  <p className="text-[10px] font-bold mt-1 px-2 py-0.5 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-100 dark:border-slate-700">Stock: {p.stock}</p>
                 )}
               </button>
             )

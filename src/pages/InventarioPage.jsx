@@ -267,14 +267,14 @@ export function InventarioPage() {
               <div className="flex items-center gap-2 shrink-0">
                 <button 
                   onClick={() => handleOpenEdit(p)}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl transition-colors shadow-sm border border-slate-200 dark:border-slate-700 active:scale-95"
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 p-3 rounded-2xl transition-colors shadow-sm border border-slate-200 dark:border-slate-700 active:scale-95"
                   title="Editar Producto"
                 >
                   <Pencil size={20} />
                 </button>
                 <button 
                   onClick={() => handleOpenSurtido(p)}
-                  className="bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-2xl flex flex-col items-center justify-center transition-colors shadow-sm border border-blue-100 active:scale-95"
+                  className="bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:hover:bg-blue-900/60 dark:text-blue-300 dark:border-blue-900/50 px-4 py-3 rounded-2xl flex flex-col items-center justify-center transition-colors shadow-sm border border-blue-100 active:scale-95"
                   title="Surtir Stock"
                 >
                   <PlusCircle size={22} className="mb-1" />
@@ -302,11 +302,11 @@ export function InventarioPage() {
               {/* Image Upload */}
               <div>
                 <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Foto (Opcional)</label>
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
                   {imagePreview ? (
                     <img src={imagePreview} alt="Preview" className="w-20 h-20 rounded-xl object-cover border border-slate-300 shadow-sm" />
                   ) : (
-                    <div className="w-20 h-20 rounded-xl bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 flex items-center justify-center text-slate-400 shrink-0">
+                    <div className="w-20 h-20 rounded-xl bg-white dark:bg-slate-900 border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center text-slate-400 shrink-0">
                       <ImageIcon size={28} />
                     </div>
                   )}
