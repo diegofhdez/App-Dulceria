@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
-import { PackagePlus, PlusCircle, AlertCircle, CheckCircle2, Search, X, ScanLine, Image as ImageIcon } from 'lucide-react'
+import { PackagePlus, PlusCircle, AlertCircle, CheckCircle2, Search, X, ScanLine, Image as ImageIcon, Pencil } from 'lucide-react'
 import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode'
 
 export function InventarioPage() {
@@ -11,6 +11,7 @@ export function InventarioPage() {
   const [successMsg, setSuccessMsg] = useState('')
   const [isScanning, setIsScanning] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [editingProduct, setEditingProduct] = useState(null)
 
   // Form states
   const [codigoBarras, setCodigoBarras] = useState('')
@@ -72,7 +73,7 @@ export function InventarioPage() {
     if (!codigoBarras || !nombre || !precioCosto || !precioVenta) return
     setIsSaving(true)
 
-    let imageUrl = null
+    let imageUrl = editingProduct ? editingProduct.imagen_url : null
 
     // Upload image to Supabase Storage if one is selected
     if (imageFile) {
@@ -90,29 +91,38 @@ export function InventarioPage() {
         imageUrl = publicUrl
       } else {
         console.error('Error subiendo imagen:', uploadError)
-        // Continuamos de todas formas, el producto se creará sin imagen
+        // Continuamos de todas formas
       }
     }
 
-    const { error } = await supabase.from('productos').insert({
+    const payload = {
       codigo_barras: codigoBarras,
       nombre: nombre.trim(),
       stock: parseInt(stock) || 0,
       precio_costo: parseFloat(precioCosto),
       precio_venta: parseFloat(precioVenta),
       imagen_url: imageUrl
-    })
+    }
+
+    let error;
+    if (editingProduct) {
+      const { error: updateError } = await supabase.from('productos').update(payload).eq('id', editingProduct.id)
+      error = updateError
+    } else {
+      const { error: insertError } = await supabase.from('productos').insert(payload)
+      error = insertError
+    }
 
     setIsSaving(false)
 
     if (!error) {
-      setSuccessMsg('Producto agregado correctamente')
+      setSuccessMsg(editingProduct ? 'Producto actualizado correctamente' : 'Producto agregado correctamente')
       setModalOpen(false)
       resetForm()
       fetchProductos()
       setTimeout(() => setSuccessMsg(''), 3000)
     } else {
-      alert('Error al agregar el producto. Verifica que el código de barras no exista ya.')
+      alert(editingProduct ? 'Error al actualizar el producto.' : 'Error al agregar el producto. Verifica que el código de barras no exista ya.')
     }
   }
 
@@ -125,6 +135,19 @@ export function InventarioPage() {
     setImageFile(null)
     setImagePreview('')
     setIsScanning(false)
+    setEditingProduct(null)
+  }
+
+  const handleOpenEdit = (prod) => {
+    setEditingProduct(prod)
+    setCodigoBarras(prod.codigo_barras || '')
+    setNombre(prod.nombre || '')
+    setStock(prod.stock !== null && prod.stock !== undefined ? prod.stock : '')
+    setPrecioCosto(prod.precio_costo || '')
+    setPrecioVenta(prod.precio_venta || '')
+    setImagePreview(prod.imagen_url || '')
+    setImageFile(null)
+    setModalOpen(true)
   }
 
   const handleOpenSurtido = (prod) => {
@@ -230,14 +253,24 @@ export function InventarioPage() {
                 </div>
               </div>
               
-              <button 
-                onClick={() => handleOpenSurtido(p)}
-                className="bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-2xl flex flex-col items-center justify-center transition-colors shrink-0 shadow-sm border border-blue-100 active:scale-95"
-                title="Surtir Stock"
-              >
-                <PlusCircle size={22} className="mb-1" />
-                <span className="text-[10px] font-black uppercase tracking-wider">+ Stock</span>
-              </button>
+              <div className="flex gap-2 shrink-0">
+                <button 
+                  onClick={() => handleOpenEdit(p)}
+                  className="bg-slate-50 hover:bg-slate-100 text-slate-700 px-4 py-3 rounded-2xl flex flex-col items-center justify-center transition-colors shadow-sm border border-slate-200 active:scale-95"
+                  title="Editar Producto"
+                >
+                  <Pencil size={22} className="mb-1" />
+                  <span className="text-[10px] font-black uppercase tracking-wider">Editar</span>
+                </button>
+                <button 
+                  onClick={() => handleOpenSurtido(p)}
+                  className="bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-2xl flex flex-col items-center justify-center transition-colors shadow-sm border border-blue-100 active:scale-95"
+                  title="Surtir Stock"
+                >
+                  <PlusCircle size={22} className="mb-1" />
+                  <span className="text-[10px] font-black uppercase tracking-wider">+ Stock</span>
+                </button>
+              </div>
             </div>
           ))
         )}
@@ -248,7 +281,7 @@ export function InventarioPage() {
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center animate-in fade-in">
           <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-6 shadow-2xl max-h-[90vh] overflow-y-auto animate-in slide-in-from-bottom-full sm:zoom-in-95">
             <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-2">
-              <h3 className="text-2xl font-black text-slate-800">Nuevo Producto</h3>
+              <h3 className="text-2xl font-black text-slate-800">{editingProduct ? 'Editar Producto' : 'Nuevo Producto'}</h3>
               <button onClick={() => setModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-2 bg-slate-100 rounded-full">
                 <X size={20} />
               </button>
@@ -359,7 +392,7 @@ export function InventarioPage() {
                   {isSaving ? (
                     <div className="w-6 h-6 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
                   ) : (
-                    'Guardar Producto'
+                    editingProduct ? 'Guardar Cambios' : 'Guardar Producto'
                   )}
                 </button>
               </div>
