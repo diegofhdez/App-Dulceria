@@ -196,101 +196,10 @@ export function CorteCajaPage() {
   }
 
   return (
-    <div className="space-y-6 pb-6">
+    <div className="space-y-6 pb-6 pt-2">
       
-      {/* Estado de Inversión Global (Lifetime) */}
-      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-5 flex items-center gap-2">
-          <Target size={20} className="text-indigo-500" /> Estado de Inversión
-        </h3>
-        
-        <div className="flex justify-between items-end mb-3">
-          <div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1">Inversión Total</p>
-            <p className="text-3xl font-black text-slate-800 dark:text-slate-100">${inversion.total.toFixed(2)}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-[10px] font-black text-emerald-500 uppercase tracking-wider mb-1">Recuperado</p>
-            <p className="text-3xl font-black text-emerald-500">${inversion.recuperado.toFixed(2)}</p>
-          </div>
-        </div>
-
-        <div className="h-5 w-full bg-slate-100 rounded-full overflow-hidden mb-4 relative shadow-inner">
-          <div 
-            className={`h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end px-2 ${inversion.recuperado >= inversion.total ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : 'bg-gradient-to-r from-indigo-400 to-indigo-500'}`}
-            style={{ width: `${inversion.porcentaje}%` }}
-          >
-            {inversion.porcentaje > 15 && (
-              <span className="text-[10px] font-black text-white/90">{inversion.porcentaje.toFixed(0)}%</span>
-            )}
-          </div>
-        </div>
-
-        {inversion.recuperado >= inversion.total && inversion.total > 0 ? (
-          <p className="text-sm font-bold text-emerald-700 text-center bg-emerald-50 p-3 rounded-2xl border border-emerald-100 shadow-sm animate-in zoom-in-95">
-            🎉 ¡Punto de equilibrio superado! Ahora son ganancias netas.
-          </p>
-        ) : (
-          <p className="text-sm font-bold text-indigo-700 text-center bg-indigo-50 p-3 rounded-2xl border border-indigo-100 shadow-sm">
-            Faltan <span className="font-black text-indigo-900">${inversion.falta.toFixed(2)}</span> para llegar al punto de equilibrio.
-          </p>
-        )}
-      </div>
-
-      <div className="h-px bg-slate-200 w-full rounded-full"></div>
-
-      {/* Rendimiento por Producto */}
-      <div>
-        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2 px-1">
-          <BarChart3 size={20} className="text-amber-500" /> Rendimiento por Producto
-        </h3>
-        
-        <div className="space-y-3">
-          {inversion.productos.map(p => {
-            const isProfit = p.porcentaje >= 100
-            const barWidth = Math.min(p.porcentaje, 100)
-            
-            return (
-              <div key={p.id} className="bg-white dark:bg-slate-900 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
-                <div className="flex justify-between items-center mb-3">
-                  <h4 className="font-black text-slate-800 dark:text-slate-100 truncate pr-2">{p.nombre}</h4>
-                  <span className={clsx(
-                    "text-xs font-black px-2 py-1 rounded-lg shrink-0",
-                    isProfit ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
-                  )}>
-                    {p.porcentaje.toFixed(0)}% ROI
-                  </span>
-                </div>
-                
-                <div className="flex justify-between text-xs font-bold text-slate-500 mb-2">
-                  <span>Inv: ${p.inversion.toFixed(2)}</span>
-                  <span>Rec: ${p.recuperado.toFixed(2)}</span>
-                </div>
-
-                <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden shadow-inner">
-                  <div 
-                    className={clsx(
-                      "h-full rounded-full transition-all duration-1000 ease-out",
-                      isProfit ? "bg-emerald-500" : "bg-gradient-to-r from-amber-400 to-orange-500"
-                    )}
-                    style={{ width: `${barWidth}%` }}
-                  ></div>
-                </div>
-              </div>
-            )
-          })}
-          {inversion.productos.length === 0 && (
-            <div className="text-center py-8 text-slate-400 font-medium">
-              Aún no hay productos en el inventario.
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="h-px bg-slate-200 w-full rounded-full mt-6"></div>
-
       {/* Filters for Corte */}
-      <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl flex gap-1 shadow-inner mt-6">
+      <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl flex gap-1 shadow-inner">
         <button 
           onClick={() => setFilter('day')}
           className={clsx(
@@ -322,10 +231,10 @@ export function CorteCajaPage() {
 
       {loading ? (
         <div className="animate-pulse space-y-4">
-          <div className="h-40 bg-slate-200 rounded-3xl"></div>
+          <div className="h-40 bg-slate-200 dark:bg-slate-800 rounded-3xl"></div>
           <div className="flex gap-4">
-            <div className="h-32 bg-slate-200 rounded-3xl flex-1"></div>
-            <div className="h-32 bg-slate-200 rounded-3xl flex-1"></div>
+            <div className="h-32 bg-slate-200 dark:bg-slate-800 rounded-3xl flex-1"></div>
+            <div className="h-32 bg-slate-200 dark:bg-slate-800 rounded-3xl flex-1"></div>
           </div>
         </div>
       ) : (
@@ -391,17 +300,17 @@ export function CorteCajaPage() {
             <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left whitespace-nowrap">
-                  <thead className="bg-slate-50 text-slate-500 text-[10px] uppercase font-bold tracking-wider">
+                  <thead className="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold tracking-wider">
                     <tr>
                       <th className="px-5 py-4">Dulce</th>
-                      <th className="px-4 py-4 text-center text-blue-600">+ Surtido</th>
-                      <th className="px-4 py-4 text-center text-emerald-600">- Efectivo</th>
-                      <th className="px-4 py-4 text-center text-orange-500">- Fiado</th>
-                      <th className="px-4 py-4 text-center text-indigo-500">- ApplePay</th>
+                      <th className="px-4 py-4 text-center text-blue-600 dark:text-blue-400">+ Surtido</th>
+                      <th className="px-4 py-4 text-center text-emerald-600 dark:text-emerald-400">- Efectivo</th>
+                      <th className="px-4 py-4 text-center text-orange-500 dark:text-orange-400">- Fiado</th>
+                      <th className="px-4 py-4 text-center text-indigo-500 dark:text-indigo-400">- ApplePay</th>
                       <th className="px-5 py-4 text-center text-slate-800 dark:text-slate-100">= Queda</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {data.table.length === 0 ? (
                       <tr>
                         <td colSpan="6" className="px-5 py-10 text-center text-slate-400 font-medium">
@@ -410,13 +319,13 @@ export function CorteCajaPage() {
                       </tr>
                     ) : (
                       data.table.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-slate-50/80 transition-colors">
+                        <tr key={idx} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
                           <td className="px-5 py-4 font-bold text-slate-800 dark:text-slate-100">{row.nombre}</td>
-                          <td className="px-4 py-4 text-center font-medium text-slate-600">{row.surtido}</td>
-                          <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoEfectivo}</td>
-                          <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoFiado}</td>
-                          <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoApplePay}</td>
-                          <td className="px-5 py-4 text-center font-black text-slate-900 dark:text-slate-100 bg-slate-50/50">{row.stockActual}</td>
+                          <td className="px-4 py-4 text-center font-medium text-slate-600 dark:text-slate-400">{row.surtido}</td>
+                          <td className="px-4 py-4 text-center font-medium text-slate-600 dark:text-slate-400">{row.vendidoEfectivo}</td>
+                          <td className="px-4 py-4 text-center font-medium text-slate-600 dark:text-slate-400">{row.vendidoFiado}</td>
+                          <td className="px-4 py-4 text-center font-medium text-slate-600 dark:text-slate-400">{row.vendidoApplePay}</td>
+                          <td className="px-5 py-4 text-center font-black text-slate-900 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-800/50">{row.stockActual}</td>
                         </tr>
                       ))
                     )}
@@ -427,6 +336,95 @@ export function CorteCajaPage() {
           </div>
         </>
       )}
+
+      <div className="h-px bg-slate-200 dark:bg-slate-800 w-full rounded-full my-8"></div>
+
+      {/* Estado de Inversión Global (Lifetime) */}
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
+        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-5 flex items-center gap-2">
+          <Target size={20} className="text-indigo-500" /> Estado de Inversión
+        </h3>
+        
+        <div className="flex justify-between items-end mb-3">
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-1">Inversión Total</p>
+            <p className="text-3xl font-black text-slate-800 dark:text-slate-100">${inversion.total.toFixed(2)}</p>
+          </div>
+          <div className="text-right">
+            <p className="text-[10px] font-black text-emerald-500 uppercase tracking-wider mb-1">Recuperado</p>
+            <p className="text-3xl font-black text-emerald-500">${inversion.recuperado.toFixed(2)}</p>
+          </div>
+        </div>
+
+        <div className="h-5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden mb-4 relative shadow-inner">
+          <div 
+            className={`h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end px-2 ${inversion.recuperado >= inversion.total ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' : 'bg-gradient-to-r from-indigo-400 to-indigo-500'}`}
+            style={{ width: `${inversion.porcentaje}%` }}
+          >
+            {inversion.porcentaje > 15 && (
+              <span className="text-[10px] font-black text-white/90">{inversion.porcentaje.toFixed(0)}%</span>
+            )}
+          </div>
+        </div>
+
+        {inversion.recuperado >= inversion.total && inversion.total > 0 ? (
+          <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400 text-center bg-emerald-50 dark:bg-emerald-950/30 p-3 rounded-2xl border border-emerald-100 dark:border-emerald-900/50 shadow-sm animate-in zoom-in-95">
+            🎉 ¡Punto de equilibrio superado! Ahora son ganancias netas.
+          </p>
+        ) : (
+          <p className="text-sm font-bold text-indigo-700 dark:text-indigo-400 text-center bg-indigo-50 dark:bg-indigo-950/30 p-3 rounded-2xl border border-indigo-100 dark:border-indigo-900/50 shadow-sm">
+            Faltan <span className="font-black text-indigo-900 dark:text-indigo-300">${inversion.falta.toFixed(2)}</span> para llegar al punto de equilibrio.
+          </p>
+        )}
+      </div>
+
+      {/* Rendimiento por Producto */}
+      <div className="mt-6">
+        <h3 className="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2 px-1">
+          <BarChart3 size={20} className="text-amber-500" /> Rendimiento por Producto
+        </h3>
+        
+        <div className="space-y-3">
+          {inversion.productos.map(p => {
+            const isProfit = p.porcentaje >= 100
+            const barWidth = Math.min(p.porcentaje, 100)
+            
+            return (
+              <div key={p.id} className="bg-white dark:bg-slate-900 p-4 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div className="flex justify-between items-center mb-3">
+                  <h4 className="font-black text-slate-800 dark:text-slate-100 truncate pr-2">{p.nombre}</h4>
+                  <span className={clsx(
+                    "text-xs font-black px-2 py-1 rounded-lg shrink-0",
+                    isProfit ? "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400" : "bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-400"
+                  )}>
+                    {p.porcentaje.toFixed(0)}% ROI
+                  </span>
+                </div>
+                
+                <div className="flex justify-between text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
+                  <span>Inv: ${p.inversion.toFixed(2)}</span>
+                  <span>Rec: ${p.recuperado.toFixed(2)}</span>
+                </div>
+
+                <div className="h-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden shadow-inner">
+                  <div 
+                    className={clsx(
+                      "h-full rounded-full transition-all duration-1000 ease-out",
+                      isProfit ? "bg-emerald-500" : "bg-gradient-to-r from-amber-400 to-orange-500"
+                    )}
+                    style={{ width: `${barWidth}%` }}
+                  ></div>
+                </div>
+              </div>
+            )
+          })}
+          {inversion.productos.length === 0 && (
+            <div className="text-center py-8 text-slate-400 font-medium">
+              Aún no hay productos en el inventario.
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
