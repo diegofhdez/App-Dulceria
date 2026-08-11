@@ -142,6 +142,7 @@ export function CorteCajaPage() {
           surtido: 0,
           vendidoEfectivo: 0,
           vendidoFiado: 0,
+          vendidoApplePay: 0,
           stockActual: p.stock
         }
       })
@@ -173,13 +174,14 @@ export function CorteCajaPage() {
             prod.vendidoFiado += m.cantidad
           } else if (m.metodo_pago === 'qr_apple_pay') {
             totalApplePay += parseFloat(precioTotal)
+            prod.vendidoApplePay += m.cantidad
           }
         }
       })
     }
 
     const tableData = Object.values(productMap).filter(
-      p => p.surtido > 0 || p.vendidoEfectivo > 0 || p.vendidoFiado > 0
+      p => p.surtido > 0 || p.vendidoEfectivo > 0 || p.vendidoFiado > 0 || p.vendidoApplePay > 0
     )
 
     setData({
@@ -388,13 +390,14 @@ export function CorteCajaPage() {
                       <th className="px-4 py-4 text-center text-blue-600">+ Surtido</th>
                       <th className="px-4 py-4 text-center text-emerald-600">- Efectivo</th>
                       <th className="px-4 py-4 text-center text-orange-500">- Fiado</th>
+                      <th className="px-4 py-4 text-center text-indigo-500">- ApplePay</th>
                       <th className="px-5 py-4 text-center text-slate-800">= Queda</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {data.table.length === 0 ? (
                       <tr>
-                        <td colSpan="5" className="px-5 py-10 text-center text-slate-400 font-medium">
+                        <td colSpan="6" className="px-5 py-10 text-center text-slate-400 font-medium">
                           No hay movimientos en este periodo
                         </td>
                       </tr>
@@ -405,6 +408,7 @@ export function CorteCajaPage() {
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.surtido}</td>
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoEfectivo}</td>
                           <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoFiado}</td>
+                          <td className="px-4 py-4 text-center font-medium text-slate-600">{row.vendidoApplePay}</td>
                           <td className="px-5 py-4 text-center font-black text-slate-900 bg-slate-50/50">{row.stockActual}</td>
                         </tr>
                       ))
