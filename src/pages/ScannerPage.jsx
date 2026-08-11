@@ -49,11 +49,16 @@ export function ScannerPage() {
     const scanner = new Html5QrcodeScanner(
       "reader-sell",
       { 
-        fps: 30, 
-        qrbox: { width: 250, height: 150 },
+        fps: 10, 
+        qrbox: { width: 300, height: 100 },
+        useBarCodeDetectorIfSupported: true,
+        rememberLastUsedCamera: true,
         supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
         videoConstraints: {
-          facingMode: "environment"
+          facingMode: "environment",
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+          advanced: [{ focusMode: "continuous" }]
         }
       },
       false
